@@ -1,0 +1,37 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "google",
+        "plugin:import/errors",
+        "plugin:import/warnings"],
+    "plugins": [
+        "import"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 7,
+        "sourceType": "module"
+    },
+    "parser": "babel-eslint",
+    "env": {
+        "mocha": true,
+        "es6": true,
+        "node": true
+    },
+    "rules": {
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        "max-len": ["error", {
+            "ignoreComments": true,
+            "ignoreTemplateLiterals": true,
+            "ignoreTrailingComments": true,
+            "ignoreUrls": true
+        }],
+        "no-invalid-this": 0,
+        "new-cap": ["error", {
+            "properties": false
+        }],
+        "require-jsdoc": 0
+    }
+}
