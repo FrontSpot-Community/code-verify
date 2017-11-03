@@ -1,26 +1,26 @@
 import mongoose from 'mongoose';
-import {findAndCount} from '../libs/helper';
+import {
+    findAndCount,
+    findOneOrCreate
+} from '../libs/helper';
 const Schema = mongoose.Schema;
 
+const stringAndTrimType = {
+    type: String,
+    trim: true
+};
+
 const userSchema = new Schema({
-    userName: {
-        type: String,
-        trim: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: 'This email already exists',
-        trim: true,
-        lowercase: true
-    },
-    password: {
-        type: String,
-        required: true
-    }
+    githubLogin: stringAndTrimType,
+    githubUsername: stringAndTrimType,
+    githubDisplayName: stringAndTrimType,
+    githubId: stringAndTrimType,
+    githubProfileUrl: stringAndTrimType,
+    gitHubAvatar_url: stringAndTrimType
 });
 
 userSchema.statics.findAndCount = findAndCount;
+userSchema.statics.findOneOrCreate = findOneOrCreate;
 
 const userModel = mongoose.model('User', userSchema);
 export default userModel;

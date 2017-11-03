@@ -3,6 +3,7 @@ import config from '../configuration';
 /* eslint-disable no-console */
 
 mongoose.connect(config.get('db:connection'), {useMongoClient: true});
+mongoose.Promise = Promise;
 
 const connection = mongoose.connection;
 
