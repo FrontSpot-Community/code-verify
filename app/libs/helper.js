@@ -13,3 +13,29 @@ export async function findAndCount(
         data
     };
 }
+
+export async function findOneOrCreate(criteria, document) {
+     const data = await this.findOne(criteria);
+
+     const insertDocument = (doc) => {
+         const objectToSave = new this(githubModelToUserModel(document));
+
+         return objectToSave
+             .save()
+             .then((savedData) => savedData )
+             .catch((error) => Promise.reject(error));
+     };
+
+     return data ? data : insertDocument(document);
+}
+
+export function githubModelToUserModel(githubUser) {
+    return {
+        githubId: githubUser.id,
+        githubUsername: githubUser.username,
+        githubDisplayName: githubUser.displayName,
+        githubProfileUrl: githubUser.profileUrl,
+        githubLogin: githubUser._json.login,
+        gitHubAvatar_url: githubUser._json.avatar_url
+    };
+}
