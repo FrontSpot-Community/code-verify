@@ -1,14 +1,12 @@
 import mongoose from 'mongoose';
+import {createModel} from '../libs/mongoose';
+import {stringAndTrimType} from '../libs/mongoosePropertyTypes';
 import {
     findAndCount,
     findOneOrCreate
-} from '../libs/helper';
-const Schema = mongoose.Schema;
+} from '../libs/mongooseExtensionMethods';
 
-const stringAndTrimType = {
-    type: String,
-    trim: true
-};
+const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     githubLogin: stringAndTrimType,
@@ -16,11 +14,17 @@ const userSchema = new Schema({
     githubDisplayName: stringAndTrimType,
     githubId: stringAndTrimType,
     githubProfileUrl: stringAndTrimType,
-    gitHubAvatar_url: stringAndTrimType
+    gitHubAvatar_url: stringAndTrimType,
+    solutionIds: {
+        type: [Schema.Types.ObjectId]
+    }
 });
 
-userSchema.statics.findAndCount = findAndCount;
-userSchema.statics.findOneOrCreate = findOneOrCreate;
+const userModel = createModel(
+    'User',
+    userSchema,
+    findAndCount,
+    findOneOrCreate
+);
 
-const userModel = mongoose.model('User', userSchema);
 export default userModel;
