@@ -5,31 +5,18 @@ import {
 } from '../libs/helper';
 const Schema = mongoose.Schema;
 
+const stringAndTrimType = {
+    type: String,
+    trim: true
+};
+
 const userSchema = new Schema({
-    githubLogin: {
-        type: String,
-        trim: true
-    },
-    githubUsername: {
-        type: String,
-        trim: true
-    },
-    githubDisplayName: {
-        type: String,
-        trim: true
-    },
-    githubId: {
-        type: String,
-        trim: true
-    },
-    githubProfileUrl: {
-        type: String,
-        trim: true
-    },
-    gitHubAvatar_url: {
-        type: String,
-        trim: true
-    }
+    githubLogin: stringAndTrimType,
+    githubUsername: stringAndTrimType,
+    githubDisplayName: stringAndTrimType,
+    githubId: stringAndTrimType,
+    githubProfileUrl: stringAndTrimType,
+    gitHubAvatar_url: stringAndTrimType
 });
 
 userSchema.statics.findAndCount = findAndCount;
