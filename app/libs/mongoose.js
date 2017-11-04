@@ -18,3 +18,23 @@ connection.once('close', function() {
     console.log('db is closed');
 });
 export default connection;
+
+
+export const createModel = (modelName, schema, ...staticMethods) => {
+    return mongoose.model(
+        modelName,
+        addStaticMethodsToSchema(schema, staticMethods)
+    );
+};
+
+
+const addStaticMethodsToSchema = (schema, staticMethods) => {
+    const reducer = (accumulator, method) => {
+        accumulator.statics[method.name] = method;
+        return accumulator;
+    };
+
+    staticMethods.length && staticMethods.reduce(reducer, schema);
+
+    return schema;
+};

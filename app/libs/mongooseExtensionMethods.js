@@ -15,18 +15,18 @@ export async function findAndCount(
 }
 
 export async function findOneOrCreate(criteria, document) {
-     const data = await this.findOne(criteria);
+    const data = await this.findOne(criteria);
 
-     const insertDocument = (doc) => {
-         const objectToSave = new this(githubModelToUserModel(document));
+    const insertDocument = (doc) => {
+        const objectToSave = new this(githubModelToUserModel(document));
 
-         return objectToSave
-             .save()
-             .then((savedData) => savedData )
-             .catch((error) => Promise.reject(error));
-     };
+        return objectToSave
+            .save()
+            .then((savedData) => savedData )
+            .catch((error) => Promise.reject(error));
+    };
 
-     return data ? data : insertDocument(document);
+    return data ? data : insertDocument(document);
 }
 
 export function githubModelToUserModel(githubUser) {
