@@ -34,7 +34,7 @@ const addStaticMethodsToSchema = (schema, staticMethods) => {
         return accumulator;
     };
 
-    staticMethods.length > 0 && staticMethods.reduce(reducer, schema);
+    staticMethods.length && staticMethods.reduce(reducer, schema);
 
     return schema;
 };
