@@ -9,11 +9,17 @@ const SolutionSchema = new Schema({
     userId: Schema.Types.ObjectId,
     taskId: Schema.Types.ObjectId,
     answer: stringAndTrimType,
+    runOutput: stringAndTrimType,
+    solutionText: stringAndTrimType,
     datetime: {
         type: Date
     },
     score: {
         type: Number
+    },
+    isDone: {
+        type: Boolean,
+        default: false
     }
 });
 
