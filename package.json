@@ -6,7 +6,7 @@
   "scripts": {
     "prestart": "npm run docs",
     "start": "npm-run-all --parallel test start:server lint:watch ",
-    "start:server": "cross-env NODE_ENV=development babel-node app",
+    "start:server": "cross-env NODE_ENV=development nodemon app --exec babel-node",
     "lint": "esw --fix --ignore-path .gitignore",
     "lint:watch": "npm run lint -- --watch",
     "test": "mocha --reporter spec progress tools/testSetup.js \"app/**/*.test.js\"",

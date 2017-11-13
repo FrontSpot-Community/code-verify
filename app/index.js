@@ -9,7 +9,6 @@ import routers from './routers';
 import * as common from './middlewares/common';
 import passportInitializer from './libs/passaportInitializer';
 import gitHubStrategyFactory from './libs/githubStrategyFactory';
-import _ from 'lodash';
 
 const sessionOptions = {
     secret: config.get('session_secret'),
@@ -18,9 +17,6 @@ const sessionOptions = {
 };
 
 const app = express();
-
-global._root = __dirname;
-global._ = _;
 
 app.use(cookieParser());
 app.use(session(sessionOptions));
