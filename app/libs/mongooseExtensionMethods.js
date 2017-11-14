@@ -1,32 +1,39 @@
 export async function findAndCount(
     filter = {},
     skipLimit = null,
-    sort = null,
-    populate = null
+    sort = null
 ) {
-    const [count, data] = await Promise.all([
-        this.count(filter),
-        this.find(filter, null, skipLimit).sort(sort)
-    ]);
-    return {
-        count,
-        data
-    };
+    try {
+        const [count, data] = await Promise.all([
+            this.count(filter),
+            this.find(filter, null, skipLimit).sort(sort)
+        ]);
+        return {
+            count,
+            data
+        };
+    } catch (exception) {
+        return Promise.reject(exception);
+    }
 }
 
 export async function findOneOrCreate(criteria, document) {
-    const data = await this.findOne(criteria);
+    try {
+        const data = await this.findOne(criteria);
 
-    const insertDocument = (doc) => {
-        const objectToSave = new this(githubModelToUserModel(document));
+        const insertDocument = (doc) => {
+            const objectToSave = new this(githubModelToUserModel(doc));
 
-        return objectToSave
-            .save()
-            .then((savedData) => savedData )
-            .catch((error) => Promise.reject(error));
-    };
+            return objectToSave
+                .save()
+                .then((savedData) => savedData )
+                .catch((error) => Promise.reject(error));
+        };
 
-    return data ? data : insertDocument(document);
+        return data ? data : insertDocument(document);
+    } catch (exception) {
+        return Promise.reject(exception);
+    }
 }
 
 export function githubModelToUserModel(githubUser) {

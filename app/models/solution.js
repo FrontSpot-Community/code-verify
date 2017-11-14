@@ -6,8 +6,14 @@ import {findAndCount} from '../libs/mongooseExtensionMethods';
 const Schema = mongoose.Schema;
 
 const SolutionSchema = new Schema({
-    userId: Schema.Types.ObjectId,
-    taskId: Schema.Types.ObjectId,
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    taskId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Task'
+    },
     answer: stringAndTrimType,
     runOutput: stringAndTrimType,
     solutionText: stringAndTrimType,
