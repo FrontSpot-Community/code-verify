@@ -14,10 +14,7 @@ const userSchema = new Schema({
     githubDisplayName: stringAndTrimType,
     githubId: stringAndTrimType,
     githubProfileUrl: stringAndTrimType,
-    gitHubAvatar_url: stringAndTrimType,
-    solutionIds: {
-        type: [Schema.Types.ObjectId]
-    }
+    gitHubAvatar_url: stringAndTrimType
 });
 
 const userModel = createModel(

@@ -18,8 +18,6 @@ const sessionOptions = {
 
 const app = express();
 
-global._root = __dirname;
-
 app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -28,5 +26,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 passportInitializer(passport, gitHubStrategyFactory());
 app.use('/', routers);
+app.use('/docs', express.static('docs'));
 app.use(common.errorHandler);
 app.listen(config.get('port'), common.listen);

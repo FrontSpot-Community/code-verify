@@ -1,6 +1,11 @@
 import express from 'express';
 import passport from 'passport';
 
+/**
+ * @module Routes/Auth route
+ */
+
+
 const router = express.Router();
 
 router.get('/auth/github', passport.authenticate('github'));
