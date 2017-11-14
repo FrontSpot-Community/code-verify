@@ -18,7 +18,7 @@ export async function findOneOrCreate(criteria, document) {
     const data = await this.findOne(criteria);
 
     const insertDocument = (doc) => {
-        const objectToSave = new this(githubModelToUserModel(document));
+        const objectToSave = new this(githubModelToUserModel(doc));
 
         return objectToSave
             .save()
