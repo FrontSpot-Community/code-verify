@@ -2,11 +2,8 @@ version: "3"
 services:
   code-verify:
     build: .
-    volumes:
-      - ./app:/app/app
-      - ./tools:/app/tools
     ports:
-      - "3002:3002"
+      - "80:3002"
     networks:
       - backend
     depends_on:
