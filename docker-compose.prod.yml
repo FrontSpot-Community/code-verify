@@ -1,9 +1,14 @@
 version: "3"
 services:
+  code-battle:
+    image: uladzimir/code-battle
+    network_mode: "host"
+    depends_on:
+      - code-verify
   code-verify:
-    build: .
+    image: uladzimir/code-verify
     ports:
-      - "80:3002"
+      - "3002:3002"
     networks:
       - backend
     depends_on:

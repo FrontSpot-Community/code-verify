@@ -2,6 +2,7 @@ version: "3"
 services:
   code-verify:
     build: .
+    image: uladzimir/code-verify:latest
     volumes:
       - ./app:/app/app
       - ./tools:/app/tools
