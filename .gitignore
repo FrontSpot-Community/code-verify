@@ -60,3 +60,4 @@ typings/
 # Specific project files
 dist
 docs
+build

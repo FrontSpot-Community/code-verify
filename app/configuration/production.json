@@ -1,4 +1,18 @@
 {
-    "port": 3002,
-    "static": "../src"
+    "port": 3000,
+    "static": "../src",
+    "index": "../src/index.html",
+    "db": {
+        "connection": "mongodb://mongo:27017/inbriefdb",
+        "name": "inbrief",
+        "options": {
+
+        }
+    },
+    "session_secret": "code_verify",
+    "github": {
+        "clientID": "0cebe6182174a9aab2d0",
+        "clientSecret": "89e7d0c4743410198bb8ec1e5cf29f6106cfe634",
+        "callbackURL": "http://localhost:3000/auth/github/callback"
+    }
 }
