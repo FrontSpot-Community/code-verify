@@ -1,9 +1,13 @@
 import {pick} from 'lodash';
+import {composeQuery, getSkipLimit} from './common';
+
 
 export const getAll = (Model) => {
     return (req, res, next) => {
+        const query = composeQuery(req, Model);
+
         return Model
-            .findAndCount()
+            .findAndCount(query, null, getSkipLimit(query))
             .then((data) => res.json(data))
             .catch(next);
     };
