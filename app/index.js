@@ -1,7 +1,8 @@
 import './libs/mongoose';
-import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import express from 'express';
+import morgan from 'morgan';
 import session from 'express-session';
 import passport from 'passport';
 import config from './configuration';
@@ -18,6 +19,7 @@ const sessionOptions = {
 
 const app = express();
 
+app.use(morgan('common'));
 app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(bodyParser.urlencoded({extended: false}));

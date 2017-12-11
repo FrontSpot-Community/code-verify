@@ -11,7 +11,8 @@ const taskSchema = new Schema({
     description: stringAndTrimType,
     tests: {
         type: [stringAndTrimType]
-    }
+    },
+    test: stringAndTrimType
 });
 
 const taskModel = createModel(

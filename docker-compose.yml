@@ -7,14 +7,14 @@ services:
       - ./tools:/app/tools
     ports:
       - "3002:3002"
-    networks:
-      - backend
+    # networks:
+    #   - backend
     depends_on:
       - mongo
   mongo:
     image: mongo
-    networks:
-      - backend
+    # networks:
+    #   - backend
     volumes:
       - ./db:/data/db
 

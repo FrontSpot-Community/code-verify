@@ -9,6 +9,7 @@ import tournamentRouter from './tournament.router';
 import taskRouter from './task.router';
 import userRouter from './user.router';
 import solutionRouter from './solution.router';
+import runRouter from './run.router';
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.use(tournamentRouter);
 router.use(taskRouter);
 router.use(userRouter);
 router.use(solutionRouter);
+router.use(runRouter);
 
 export default router;
 
