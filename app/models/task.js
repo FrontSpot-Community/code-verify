@@ -9,6 +9,7 @@ const Schema = mongoose.Schema;
 const taskSchema = new Schema({
     name: stringAndTrimType,
     description: stringAndTrimType,
+    language: stringAndTrimType,
     tests: {
         type: [stringAndTrimType]
     },

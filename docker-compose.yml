@@ -6,7 +6,7 @@ services:
       - ./app:/app/app
       - ./tools:/app/tools
     ports:
-      - "3002:3002"
+      - "3000:3000"
     # networks:
     #   - backend
     depends_on:

@@ -12,10 +12,16 @@ export function sendTask(req, res, next) {
   request.code = solution;
 
   Task.findOne({name: taskName})
-      .then((data) => res.json(data))
-      .then((json) => {
-        console.log(json);
-        res.send(json);
+      .then((task) => {
+        const runData = {
+          language: task.language,
+          code: solution,
+          tests: task.test
+        };
+        return runner.sendTask(runData);
+      })
+      .then((result) => {
+        res.send(result);
       })
       .catch(next);
 }
