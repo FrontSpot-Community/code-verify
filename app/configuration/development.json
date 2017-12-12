@@ -16,9 +16,9 @@
         "callbackURL": "http://localhost:3000/auth/github/callback"
     },
     "codeRunner": {
-        "baseUrl": "https://localhost:3003",
+        "baseUrl": "http://code-battle.westeurope.cloudapp.azure.com/runner-api",
         "endpoints": {
-            "run": "run"
+            "run": "runner"
         }
     }
 }
