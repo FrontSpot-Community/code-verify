@@ -5,6 +5,7 @@ import express from 'express';
 import morgan from 'morgan';
 import session from 'express-session';
 import passport from 'passport';
+import cors from 'cors';
 import config from './configuration';
 import routers from './routers';
 import * as common from './middlewares/common';
@@ -16,7 +17,6 @@ const sessionOptions = {
     resave: true,
     saveUninitialized: true
 };
-
 const app = express();
 
 app.use(morgan('common'));
@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+app.use(cors());
 app.use(passport.initialize());
 app.use(passport.session());
 passportInitializer(passport, gitHubStrategyFactory());
