@@ -12,12 +12,12 @@ export const getAll = (Model) => {
 export const getById = (Model) => {
     return (req, res, next) => {
         return req.query.populateField
-            ? Model.findOne({_id: req.params.id})
+            ? Model.findOne({id: req.params.id})
                 .populate(req.query.populateField)
                 .exec()
                 .then((data) => res.json(data))
                 .catch(next)
-            : Model.findOne({_id: req.params.id})
+            : Model.findOne({id: req.params.id})
                 .then((data) => res.json(data))
                 .catch(next);
     };
