@@ -9,15 +9,17 @@ export const getAll = (Model) => {
     };
 };
 
-export const getById = (Model) => {
+export const getById = (Model, findBy) => {
     return (req, res, next) => {
+      const select = findBy ? {[findBy]: req.params.id} : {id: req.params.id};
         return req.query.populateField
-            ? Model.findOne({id: req.params.id})
+            ? Model.findOneOrThrow(select)
                 .populate(req.query.populateField)
                 .exec()
                 .then((data) => res.json(data))
                 .catch(next)
-            : Model.findOne({id: req.params.id})
+            : Model.findOneOrThrow(select)
+
                 .then((data) => res.json(data))
                 .catch(next);
     };

@@ -3,7 +3,7 @@ import * as commonCrudOperations from '../libs/commonCrudOperations';
 
 export const getAll = commonCrudOperations.getAll(Tournament);
 
-export const getById = commonCrudOperations.getById(Tournament);
+export const getById = commonCrudOperations.getById(Tournament, 'id');
 
 export const add = commonCrudOperations.add(Tournament);
 
