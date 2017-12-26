@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import {createModel} from '../libs/mongoose';
 import {stringAndTrimType} from '../libs/mongoosePropertyTypes';
-import {findAndCount, findOneOrThrow} from '../libs/mongooseExtensionMethods';
+import {findAndCount} from '../libs/mongooseExtensionMethods';
 
 const Schema = mongoose.Schema;
 
@@ -43,8 +43,7 @@ tournamentSchema.pre('save', function(next) {
 const taskModel = createModel(
     'Tournament',
     tournamentSchema,
-    findAndCount,
-    findOneOrThrow
+    findAndCount
 );
 
 export default taskModel;
