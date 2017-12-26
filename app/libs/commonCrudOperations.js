@@ -2,7 +2,10 @@ import {pick} from 'lodash';
 
 export const getAll = (Model) => {
   return (req, res, next) => {
-    return Model.findAndCount().then((data) => res.json(data)).catch(next);
+    return Model
+    .findAndCount()
+    .then((data) => res.json(data))
+    .catch(next);
   };
 };
 
@@ -33,9 +36,10 @@ export const getById = (Model, findBy) => {
 export const add = (Model) => {
   return (req, res, next) => {
     const objectToInsert = pick(req.body, Object.keys(req.body));
-    return new Model(objectToInsert).save().
-        then((data) => res.json(data)).
-        catch(next);
+    return new Model(objectToInsert)
+      .save()
+      .then((data) => res.json(data))
+      .catch(next);
   };
 };
 
@@ -45,8 +49,9 @@ export const update = (Model) => {
     const updatedDocument = pick(req.body, Object.keys(req.body));
     const options = {new: true};
 
-    return Model.findOneAndUpdate(condition, updatedDocument, options).
-        then((data) => res.json(data)).
-        catch(next);
+    return Model
+      .findOneAndUpdate(condition, updatedDocument, options)
+      .then((data) => res.json(data))
+      .catch(next);
   };
 };
