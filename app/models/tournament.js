@@ -6,7 +6,14 @@ import {findAndCount} from '../libs/mongooseExtensionMethods';
 const Schema = mongoose.Schema;
 
 const tournamentSchema = new Schema({
-    name: stringAndTrimType,
+    id: {
+        type: String,
+        trim: true,
+        index: true,
+        unique: true,
+        lowercase: true
+    },
+    name: {...stringAndTrimType, required: true},
     description: stringAndTrimType,
     tags: [stringAndTrimType],
     difficulty: stringAndTrimType,
@@ -26,6 +33,12 @@ const tournamentSchema = new Schema({
         }]
     }
 });
+
+tournamentSchema.pre('save', function(next) {
+    const id = this.name.split(' ').join('_');
+    this.id = id;
+    next();
+  });
 
 const taskModel = createModel(
     'Tournament',
