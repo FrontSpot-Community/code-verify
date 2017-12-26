@@ -6,15 +6,15 @@ services:
       - ./app:/app/app
       - ./tools:/app/tools
     ports:
-      - "3000:3000"
-    # networks:
-    #   - backend
+      - "3002:3002"
+    networks:
+      - backend
     depends_on:
       - mongo
   mongo:
     image: mongo
-    # networks:
-    #   - backend
+    networks:
+      - backend
     volumes:
       - ./db:/data/db
 
