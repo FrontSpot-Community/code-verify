@@ -3,7 +3,7 @@
     "static": "../src",
     "index": "../src/index.html",
     "db": {
-        "connection": "mongodb://mongo:27017/inbriefdb",
+        "connection": "mongodb://localhost:27017/inbriefdb",
         "name": "inbrief",
         "options": {
 
