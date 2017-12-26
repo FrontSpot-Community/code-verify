@@ -36,6 +36,15 @@ export async function findOneOrCreate(criteria, document) {
     }
 }
 
+export async function findOneOrThrow(criteria) {
+  try {
+    const data = await this.findOne(criteria);
+    return data ? data : Promise.reject({status: 404, message: 'Not Found'});
+  } catch (exception) {
+    return Promise.reject(exception);
+  }
+}
+
 export function githubModelToUserModel(githubUser) {
     return {
         githubId: githubUser.id,
