@@ -14,19 +14,23 @@ const SolutionSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Task'
     },
-    answer: stringAndTrimType,
     runOutput: stringAndTrimType,
-    solutionText: stringAndTrimType,
+    solutionCode: stringAndTrimType,
+    jsonResult: stringAndTrimType,
     datetime: {
         type: Date
     },
-    score: {
-        type: Number
+    statistics: {
+        describe: Number,
+        test: Number,
+        passed: Number,
+        failed: Number,
+        error: Number
     },
-    isDone: {
-        type: Boolean,
-        default: false
-    }
+    status: {
+        type: stringAndTrimType
+    },
+    executionError: stringAndTrimType
 });
 
 const taskModel = createModel(

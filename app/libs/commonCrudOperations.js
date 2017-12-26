@@ -19,6 +19,7 @@ export const getById = (Model, findBy) => {
                 .then((data) => res.json(data))
                 .catch(next)
             : Model.findOneOrThrow(select)
+
                 .then((data) => res.json(data))
                 .catch(next);
     };
