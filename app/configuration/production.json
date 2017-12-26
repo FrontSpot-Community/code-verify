@@ -13,6 +13,10 @@
     "github": {
         "clientID": "922ad5eefaca0cded604",
         "clientSecret": "6b21a0e1a4a52c2f54dbc7edfc9bdae30595f821",
-        "callbackURL": "http://code-battle.westeurope.cloudapp.azure.com/api/auth/github/callback"
+        "callbackURL": "http://code-battle.westeurope.cloudapp.azure.com/api/auth/github/callback",
+        "login": {
+            "success_redirect": "http://code-battle.westeurope.cloudapp.azure.com",
+            "failure_redirect": "http://code-battle.westeurope.cloudapp.azure.com/login"
+        }
     }
 }
