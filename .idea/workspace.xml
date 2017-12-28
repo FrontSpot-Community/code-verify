@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="87ccf9b1-a62f-4c5b-b4d0-176c5158e448" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/configuration/development.json" afterPath="$PROJECT_DIR$/app/configuration/development.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/index.js" afterPath="$PROJECT_DIR$/app/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/task.js" afterPath="$PROJECT_DIR$/app/models/task.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routers/auth.router.js" afterPath="$PROJECT_DIR$/app/routers/auth.router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routers/tournament.router.js" afterPath="$PROJECT_DIR$/app/routers/tournament.router.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -84,11 +78,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
+            <state relative-caret-position="367">
+              <caret line="41" column="27" lean-forward="true" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -107,7 +101,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tournament.router.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tournament.router.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routers/tournament.router.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
@@ -182,9 +176,9 @@
         <option value="$PROJECT_DIR$/app/libs/mongooseExtensionMethods.js" />
         <option value="$PROJECT_DIR$/app/configuration/development.json" />
         <option value="$PROJECT_DIR$/app/models/task.js" />
-        <option value="$PROJECT_DIR$/app/index.js" />
         <option value="$PROJECT_DIR$/app/routers/auth.router.js" />
         <option value="$PROJECT_DIR$/app/routers/tournament.router.js" />
+        <option value="$PROJECT_DIR$/app/index.js" />
       </list>
     </option>
   </component>
@@ -299,12 +293,12 @@
       <workItem from="1513935797687" duration="8000" />
       <workItem from="1513936660091" duration="4340000" />
       <workItem from="1513953064671" duration="11012000" />
-      <workItem from="1514382717435" duration="3858000" />
+      <workItem from="1514382717435" duration="4436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="94787000" />
+    <option name="totallyTimeSpent" value="95365000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -684,14 +678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="38" column="24" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/routers/auth.router.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -706,6 +692,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="41" column="27" lean-forward="true" selection-start-line="41" selection-start-column="27" selection-end-line="41" selection-end-column="27" />
           <folding />
         </state>
       </provider>

@@ -19,10 +19,13 @@ const sessionOptions = {
 };
 const app = express();
 
-let whitelist = ['http://localhost:3002', 'http://localhost:3000'];
+let whitelist = ['http://localhost:3002', 'http://localhost:3000', 'chrome-extension://'];
 
 const corsOptions = {
   origin: (origin, callback) => {
+    if(origin.includes(whitelist[2])) {
+      return callback(null, true);
+    }
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
