@@ -13,9 +13,9 @@ import passportInitializer from './libs/passaportInitializer';
 import gitHubStrategyFactory from './libs/githubStrategyFactory';
 
 const sessionOptions = {
-    secret: config.get('session_secret'),
-    resave: true,
-    saveUninitialized: true
+  secret: config.get('session_secret'),
+  resave: true,
+  saveUninitialized: true
 };
 const app = express();
 
