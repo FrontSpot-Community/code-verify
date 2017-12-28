@@ -1,28 +1,30 @@
 {
-    "port": 3002,
-    "static": "../src",
-    "index": "../src/index.html",
-    "db": {
-        "connection": "mongodb://mongo:27017/inbriefdb",
-        "name": "inbrief",
-        "options": {
-
-        }
-    },
-    "session_secret": "code_verify",
-    "github": {
-        "clientID": "0cebe6182174a9aab2d0",
-        "clientSecret": "29b8f9f457ce966d5fe439bcd19065477661a47a",
-        "callbackURL": "http://localhost:3002/auth/github/callback",
-        "login": {
-            "success_redirect": "http://localhost:3000",
-            "failure_redirect": "http://localhost:3000/login"
-        }
-    },
-    "codeRunner": {
-        "baseUrl": "http://code-battle.westeurope.cloudapp.azure.com/runner-api",
-        "endpoints": {
-            "run": "runner"
-        }
+  "port": 3002,
+  "static": "../src",
+  "index": "../src/index.html",
+  "db": {
+    "connection": "mongodb://mongo:27017/inbriefdb",
+    "name": "inbrief",
+    "options": {}
+  },
+  "corsOptions": {
+      "origin": "http://localhost:3000",
+      "credentials": true
+  },
+  "session_secret": "code_verify",
+  "github": {
+    "clientID": "0cebe6182174a9aab2d0",
+    "clientSecret": "29b8f9f457ce966d5fe439bcd19065477661a47a",
+    "callbackURL": "http://localhost:3002/auth/github/callback",
+    "login": {
+      "success_redirect": "http://localhost:3000",
+      "failure_redirect": "http://localhost:3000/login"
     }
+  },
+  "codeRunner": {
+      "baseUrl": "http://code-battle.westeurope.cloudapp.azure.com/runner-api",
+      "endpoints": {
+        "run": "runner"
+      }
+  }
 }

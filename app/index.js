@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(config.get('corsOptions')));
 app.use(passport.initialize());
 app.use(passport.session());
 passportInitializer(passport, gitHubStrategyFactory());
