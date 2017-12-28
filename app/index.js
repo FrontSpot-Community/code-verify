@@ -13,18 +13,30 @@ import passportInitializer from './libs/passaportInitializer';
 import gitHubStrategyFactory from './libs/githubStrategyFactory';
 
 const sessionOptions = {
-    secret: config.get('session_secret'),
-    resave: true,
-    saveUninitialized: true
+  secret: config.get('session_secret'),
+  resave: true,
+  saveUninitialized: true
 };
 const app = express();
+
+let whitelist = ['http://localhost:3002', 'http://localhost:3000'];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }, credentials: true
+};
 
 app.use(morgan('common'));
 app.use(cookieParser());
 app.use(session(sessionOptions));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 passportInitializer(passport, gitHubStrategyFactory());
