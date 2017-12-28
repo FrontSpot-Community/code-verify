@@ -11,10 +11,8 @@ export const getAll = commonCrudOperations.getAll(Solution);
 export const getById = commonCrudOperations.getById(Solution);
 
 export function sendTask(req, res, next) {
-  // const {user} = req;
-  // if (!user) return next('Not logged in');
-
-  const user = {_id: '5a3ff1887b47d900a865a9df'};
+  const {user} = req;
+  if (!user) return next('Not logged in');
 
   const {solutionCode, taskId} = req.body;
 
