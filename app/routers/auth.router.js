@@ -15,7 +15,9 @@ const failureRedirect = config.get('github:login:failure_redirect');
 router.get('/auth/github', passport.authenticate('github'));
 router.get('/auth/github/callback',
     passport.authenticate('github', {failureRedirect}),
-    (req, res) => res.redirect(successRedirect)
+    (req, res) => {
+      return res.redirect(successRedirect);
+    }
 );
 
 
