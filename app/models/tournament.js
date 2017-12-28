@@ -14,6 +14,7 @@ const tournamentSchema = new Schema({
         lowercase: true
     },
     name: {...stringAndTrimType, required: true},
+    title: {...stringAndTrimType, required: true},
     description: stringAndTrimType,
     tags: [stringAndTrimType],
     difficulty: stringAndTrimType,
