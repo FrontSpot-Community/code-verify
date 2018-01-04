@@ -9,6 +9,7 @@ import cors from 'cors';
 import config from './configuration';
 import routers from './routers';
 import * as common from './middlewares/common';
+import checkAuthenticationMiddleware from './middlewares/checkAuthentication';
 import passportInitializer from './libs/passaportInitializer';
 import gitHubStrategyFactory from './libs/githubStrategyFactory';
 
@@ -28,7 +29,7 @@ app.use(cors(config.get('corsOptions')));
 app.use(passport.initialize());
 app.use(passport.session());
 passportInitializer(passport, gitHubStrategyFactory());
-app.use('/', routers);
+app.use('/', checkAuthenticationMiddleware, routers);
 app.use('/docs', express.static('docs'));
 app.use(common.errorHandler);
 app.listen(config.get('port'), common.listen);
