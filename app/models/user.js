@@ -14,7 +14,12 @@ const userSchema = new Schema({
     githubDisplayName: stringAndTrimType,
     githubId: stringAndTrimType,
     githubProfileUrl: stringAndTrimType,
-    gitHubAvatar_url: stringAndTrimType
+    gitHubAvatar_url: stringAndTrimType,
+    firstName: stringAndTrimType,
+    lastName: stringAndTrimType,
+    email: stringAndTrimType,
+    phoneNumber: stringAndTrimType,
+    country: stringAndTrimType
 });
 
 const userModel = createModel(
