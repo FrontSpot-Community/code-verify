@@ -11,7 +11,9 @@ export const getAll = (Model) => {
 
 export const getById = (Model, findBy) => {
   return (req, res, next) => {
-    const select = findBy ? {[findBy]: req.params.id} : {_id: req.params.id};
+    const select = findBy
+      ? {[findBy]: req.params.id || req.user._id}
+      : {_id: req.params.id || req.user._id};
 
     const findSuccess = (data) => {
       return data
