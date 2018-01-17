@@ -14,8 +14,14 @@ const taskSchema = new Schema({
   stars: {type: Number},
   satisfaction: stringAndTrimType,
   solvedBy: stringAndTrimType,
-  status: stringAndTrimType
-
+  status: stringAndTrimType,
+  complexity: stringAndTrimType,
+  contentmentPercent: {type: Number},
+  contentmentQuantity: {type: Number},
+  resolvedSuccessfully: {type: Number},
+  resolvedQuantity: {type: Number},
+  authorName: stringAndTrimType,
+  taskStatus: stringAndTrimType
 });
 
 taskSchema.pre('save', function(next) {
