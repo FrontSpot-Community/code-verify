@@ -1,3 +1,3 @@
-import RunnerService from './solution.service';
+import SolutionService from './solution.service';
 
-export default RunnerService;
+export default SolutionService;

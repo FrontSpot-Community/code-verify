@@ -1,41 +1,23 @@
-import Solution from '../models/solution';
 import * as commonCrudOperations from '../libs/commonCrudOperations';
-import RunnerService from '../services/runner';
-import Task from '../models/task';
+import Solution from '../models/solution';
 import SolutionService from '../services/solution';
+import RunnerService from '../services/runner';
 
-const runner = new RunnerService();
+const solutionService = new SolutionService(new RunnerService);
 
 export const getAll = commonCrudOperations.getAll(Solution);
-
 export const getById = commonCrudOperations.getById(Solution);
 
 export function sendTask(req, res, next) {
+  // TODO: add joy
   const {user} = req;
-  if (!user) return next('Not logged in');
-
+  if (!user) return next('User missed');
+  // TODO: add joy
   const {solutionCode, taskId} = req.body;
 
   if (!(solutionCode && taskId)) return next();
 
-  Task.findOne({_id: taskId})
-      .then((task) => {
-        const runData = {
-          language: task.language,
-          code: solutionCode,
-          tests: task.test
-        };
-        return runner.sendTask(runData);
-      })
-      .then((result) => {
-        return SolutionService.saveSolutionRun({
-          userId: user._id,
-          taskId,
-          solutionCode,
-          result,
-          Model: Solution
-        });
-      })
-      .then((data) => res.json(data))
-      .catch(next);
+  solutionService.submitSolution(taskId, solutionCode, user)
+    .then((data) => res.json(data))
+    .catch(next);
 }
