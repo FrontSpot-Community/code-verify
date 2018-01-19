@@ -25,7 +25,8 @@ const SolutionSchema = new Schema({
         test: Number,
         passed: Number,
         failed: Number,
-        error: Number
+        error: Number,
+        time: Number
     },
     status: {
         type: stringAndTrimType
