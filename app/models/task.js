@@ -10,6 +10,8 @@ const taskSchema = new Schema({
   name: stringAndTrimType,
   description: stringAndTrimType,
   language: stringAndTrimType,
+  numberOfTests: Number,
+  sample: stringAndTrimType,
   test: stringAndTrimType,
   stars: {type: Number},
   satisfaction: stringAndTrimType,

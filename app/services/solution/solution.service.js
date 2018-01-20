@@ -6,8 +6,8 @@ export default class SolutionService {
     this.runner = runner;
   }
 
-  saveSolutionRun({userId, taskId, solutionCode, result, Model}) {
-    if (!(userId && taskId && solutionCode && result)) {
+  saveSolutionRun({userId, taskId, task, solutionCode, result, Model}) {
+    if (!(userId && taskId && task && solutionCode && result)) {
       return Promise.reject('required field is not specified');
     }
 
@@ -19,6 +19,8 @@ export default class SolutionService {
       status
     } = result;
 
+    const completed = this.isTaskFinished(task, statistics);
+
     const data = {
       userId,
       taskId,
@@ -27,17 +29,29 @@ export default class SolutionService {
       datetime: new Date(),
       statistics,
       status,
+      completed,
       executionError,
       jsonResult: JSON.stringify(json)
     };
 
-
-    return new Model(data)
-      .save();
+    const condition = {userId, taskId};
+    const options = {new: true, upsert: true};
+    return Solution
+      .findOneAndUpdate(condition, data, options);
   }
 
-  async submitSolution(taskId, solutionCode, user) {
+  isTaskFinished(task, statistics) {
+    const {numberOfTests} = task || {};
+    const {passed} = statistics || {};
+
+    return numberOfTests && passed
+      && numberOfTests > 0 && numberOfTests === passed;
+  }
+
+  async submitSolution(taskId, solutionCode, userId) {
     const task = await Task.findOne({id: taskId});
+    if (!task) return Promise.reject({status: 404, message: 'Not Found'});
+
     const runData = {
       language: task.language,
       code: solutionCode,
@@ -45,11 +59,23 @@ export default class SolutionService {
     };
     const result = await this.runner.sendTask(runData);
     return await this.saveSolutionRun({
-      userId: user._id,
+      userId: userId,
       taskId: task._id,
       solutionCode,
       result,
+      task,
       Model: Solution
     });
-}
+  }
+
+  async getByTaskId(taskId, userId) {
+    const query = {
+      taskId,
+      userId
+    };
+    const data = await Solution.findOne(query);
+    if (!data) return Promise.reject({status: 404, message: 'Not Found'});
+
+    return data;
+  }
 }
