@@ -28,6 +28,12 @@ const SolutionSchema = new Schema({
         error: Number,
         time: Number
     },
+    availableTries: Number,
+    tries: Number,
+    completed: {
+        type: Boolean,
+        default: false
+    },
     status: {
         type: stringAndTrimType
     },

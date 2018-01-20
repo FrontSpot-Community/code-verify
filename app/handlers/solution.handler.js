@@ -17,7 +17,17 @@ export function sendTask(req, res, next) {
 
   if (!(solutionCode && taskId)) return next();
 
-  solutionService.submitSolution(taskId, solutionCode, user)
+  solutionService.submitSolution(taskId, solutionCode, user._id)
+    .then((data) => res.json(data))
+    .catch(next);
+}
+
+export function getByTaskId(req, res, next) {
+  const {user} = req;
+  if (!user) return next('User missed');
+  const {taskId} = req.body;
+  solutionService
+    .getByTaskId(taskId, user._id)
     .then((data) => res.json(data))
     .catch(next);
 }
