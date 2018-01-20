@@ -24,7 +24,7 @@ export default class SolutionService {
     const data = {
       userId,
       taskId,
-      solution: solutionCode,
+      solutionCode,
       runOutput: output,
       datetime: new Date(),
       statistics,
