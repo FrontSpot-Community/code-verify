@@ -10,4 +10,4 @@ COPY . /app
 
 EXPOSE 3002
 
-CMD ["yarn", "start"]
+CMD yarn run run-build

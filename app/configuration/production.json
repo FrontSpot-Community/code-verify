@@ -20,5 +20,11 @@
       "success_redirect": "http://code-battle.westeurope.cloudapp.azure.com",
       "failure_redirect": "http://code-battle.westeurope.cloudapp.azure.com/login"
     }
+  },
+  "codeRunner": {
+      "baseUrl": "http://code-battle.westeurope.cloudapp.azure.com/runner-api",
+      "endpoints": {
+        "run": "runner"
+      }
   }
 }
