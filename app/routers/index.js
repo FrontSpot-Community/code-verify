@@ -8,7 +8,7 @@ import authRouter from './auth.router';
 import tournamentRouter from './tournament.router';
 import taskRouter from './task.router';
 import userRouter from './user.router';
-import solutionRouter from './solution.router';
+import solutionRouter from './solution';
 import runRouter from './run.router';
 
 const router = express.Router();

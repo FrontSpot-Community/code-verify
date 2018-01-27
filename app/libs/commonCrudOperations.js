@@ -1,4 +1,4 @@
-import {pick} from 'lodash';
+import pick from '../libs/pick';
 
 export const getAll = (Model) => {
   return (req, res, next) => {
