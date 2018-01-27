@@ -1,1 +1,1 @@
-export {default} from './task.service.js';
+export {default} from './task.service';

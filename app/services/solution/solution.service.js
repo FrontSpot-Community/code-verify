@@ -1,12 +1,29 @@
 import Solution from '../../models/solution';
 import Task from '../../models/task';
+import {createError} from '../../libs/common';
+import pick from '../../libs/pick';
 
 export default class SolutionService {
   constructor(runner) {
     this.runner = runner;
+
+    this.reponseFields = [
+      'taskId',
+      'completed',
+      'executionError',
+      'jsonResult',
+      'runOutput',
+      'solutionCode',
+      'statistics',
+      'status'
+    ];
   }
 
-  saveSolutionRun({userId, taskId, task, solutionCode, result, Model}) {
+  cleanResponce(data) {
+    return pick(data, this.reponseFields);
+  }
+
+  async saveSolutionRun({userId, taskId, task, solutionCode, result, Model}) {
     if (!(userId && taskId && task && solutionCode && result)) {
       return Promise.reject('required field is not specified');
     }
@@ -36,8 +53,10 @@ export default class SolutionService {
 
     const condition = {userId, taskId};
     const options = {new: true, upsert: true};
-    return Solution
+    const updatedData = await Solution
       .findOneAndUpdate(condition, data, options);
+
+    return this.cleanResponce(updatedData);
   }
 
   isTaskFinished(task, statistics) {
@@ -74,8 +93,23 @@ export default class SolutionService {
       userId
     };
     const data = await Solution.findOne(query);
-    if (!data) return Promise.reject({status: 404, message: 'Not Found'});
+    if (!data) return Promise.reject(createError('Not Found', 404));
 
-    return data;
+    return this.cleanResponce(data);
+  }
+
+  async getByTaskIds(taskIds, userId) {
+    const query = {
+      taskId: taskIds,
+      userId
+    };
+
+    const data = await Solution.find(query);
+    if (!data) return Promise.reject(createError('Not Found', 404));
+
+    if (Array.isArray(data)) {
+      return data.map((item) => this.cleanResponce(item));
+    }
+    return this.cleanResponce(data);
   }
 }
