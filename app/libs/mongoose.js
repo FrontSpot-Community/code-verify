@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import config from '../configuration';
 /* eslint-disable no-console */
 
-mongoose.connect(config.get('db:connection'), {useMongoClient: true});
+mongoose.connect(config.get('db:connection'));
 mongoose.Promise = Promise;
 
 const connection = mongoose.connection;
