@@ -64,7 +64,7 @@ export default class SolutionService {
     const {passed} = statistics || {};
 
     return numberOfTests && passed
-      && numberOfTests > 0 && numberOfTests === passed;
+      && numberOfTests > 0 && numberOfTests <= passed;
   }
 
   async submitSolution(taskId, solutionCode, userId) {

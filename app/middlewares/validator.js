@@ -30,7 +30,7 @@ function filterResponseByScheme(res, schema) {
 }
 
 export default function(schema, opts = {}) {
-  return function exporessJoiValidator(req, res, next) {
+  return function expressJoiValidator(req, res, next) {
     const filteredSchema = filterSchemaKeys(schema);
     const filteredReq = filterResponseByScheme(req, schema);
 
