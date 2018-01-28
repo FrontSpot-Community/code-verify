@@ -8,8 +8,8 @@
     "options": {}
   },
   "corsOptions": {
-      "origin": "http://localhost:3000",
-      "credentials": true
+    "origin": "http://localhost:3000",
+    "credentials": true
   },
   "session_secret": "code_verify",
   "github": {
