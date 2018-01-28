@@ -18,6 +18,7 @@ export default class TournamentService {
     const tournament = await Tournament
       .findOne(query)
       .populate('taskIds')
+      .lean()
       .exec();
 
     if (!tournament) return Promise.reject(createError('Not Found', 404));
@@ -26,19 +27,29 @@ export default class TournamentService {
 
     const solutions = await this.solutionService.getByTaskIds(taskIds, userId);
 
+    let solved = 0;
     const tasks = tournament.taskIds.map((task) => {
       const taskSolution = solutions.find((item) => {
         return String(item.taskId) === String(task._id);
       });
 
-      task.status = taskSolution
+      const status = taskSolution
         ? this.getCompletedStatus(taskSolution.completed)
         : task.status;
 
-      return task;
+      if (taskSolution && taskSolution.completed) solved++;
+
+      return {
+        ...task,
+        status
+      };
     });
 
-    tournament[taskIds] = tasks;
-    return tournament;
+    return {
+      ...tournament,
+      taskIds: tasks,
+      total: taskIds.length,
+      solved: solved
+    };
   }
 }
