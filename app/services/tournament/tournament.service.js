@@ -10,6 +10,45 @@ export default class TournamentService {
     return completed ? 'Completed' : 'In progress';
   }
 
+  getTournamentStatistic(tournament, solutions) {
+    let solved = 0;
+    tournament.taskIds.forEach((taskId) => {
+      const taskSolution = solutions.find((item) => {
+        return String(item.taskId) === String(taskId);
+      });
+      if (taskSolution && taskSolution.completed) solved++;
+    });
+
+    return {
+      solved,
+      total: tournament.taskIds.length
+    };
+  }
+
+  async getTournamets(userId) {
+    const response = await Tournament.findAndCount();
+
+    const tournaments = response.data;
+
+    const taskIds = tournaments.reduce((acc, tournament) => {
+      return [...acc, ...tournament.taskIds];
+    }, []);
+
+    const solutions = await this.solutionService.getByTaskIds(taskIds, userId);
+    const tournamentsResult = tournaments.map((tournament) => {
+      const tasksResult = this.getTournamentStatistic(tournament, solutions);
+      return {
+        ...tournament,
+        ...tasksResult
+      };
+    });
+
+    return {
+      count: response.count,
+      data: tournamentsResult
+    };
+  }
+
   async getTournamentById(tournamentId, userId) {
     const query = {
       id: tournamentId
