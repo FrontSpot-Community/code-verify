@@ -5,8 +5,8 @@ export async function findAndCount(
 ) {
     try {
         const [count, data] = await Promise.all([
-            this.count(filter),
-            this.find(filter, null, skipLimit).sort(sort)
+            this.count(filter).lean(),
+            this.find(filter, null, skipLimit).sort(sort).lean()
         ]);
         return {
             count,

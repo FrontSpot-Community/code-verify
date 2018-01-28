@@ -6,7 +6,12 @@ import TournamentService from '../services/tournament';
 const solutionService = new SolutionService();
 const tournamentService = new TournamentService(solutionService);
 
-export const getAll = commonCrudOperations.getAll(Tournament);
+export const getAll = function(req, res, next) {
+  const {user} = req;
+  tournamentService.getTournamets(user._id)
+    .then((data) => res.json(data))
+    .catch(next);
+};
 
 export const getById = function(req, res, next) {
   const {user} = req;
