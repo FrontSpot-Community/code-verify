@@ -8,7 +8,10 @@
     "options": {}
   },
   "corsOptions": {
-    "origin": "http://code-battle.westeurope.cloudapp.azure.com",
+    "origin": [
+      "http://code-battle.westeurope.cloudapp.azure.com",
+      "http://battle.frontspot.co"
+    ],
     "credentials": true
   },
   "session_secret": "code_verify",
