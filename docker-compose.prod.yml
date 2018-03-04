@@ -6,15 +6,15 @@ services:
     depends_on:
       - code-verify
   code-verify:
-    image: uladzimir/code-verify
+    image: frontspot/code-verify
     ports:
-      - "3000:3002"
+      - "3002:3002"
     networks:
       - backend
     depends_on:
       - mongo
   mongo:
-    image: mongo
+    image: mongo:latest
     networks:
       - backend
     volumes:
