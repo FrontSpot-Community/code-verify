@@ -15,8 +15,8 @@
     "clean-docs": "node_modules/.bin/rimraf ./docs",
     "clean-build": "node_modules/.bin/rimraf ./build",
     "build-server": "babel -d ./build ./app --copy-files",
-    "build": "npm  run clean-build && npm  run build-server",
-    "run-build": "npm  run build && cross-env NODE_ENV=production node ./build"
+    "build": "npm run clean-build && npm run build-server",
+    "run-build": "npm run build && cross-env NODE_ENV=production node ./build"
   },
   "pre-commit": [
     "lint",
