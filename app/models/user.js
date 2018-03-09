@@ -19,7 +19,9 @@ const userSchema = new Schema({
     lastName: stringAndTrimType,
     email: stringAndTrimType,
     phoneNumber: stringAndTrimType,
-    country: stringAndTrimType
+    country: stringAndTrimType,
+    upsa: stringAndTrimType,
+    epamEmployee: Boolean
 });
 
 const userModel = createModel(
