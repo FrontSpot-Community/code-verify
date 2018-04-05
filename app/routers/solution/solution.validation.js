@@ -14,6 +14,8 @@ export const solutionIdSchema = {
 
 export const solutionSubmitScheme = {
   body: {
+    userInfo: Joi.object(),
+    tournamentId: Joi.string(),
     solutionCode: Joi.string().required(),
     taskId: Joi.string().required()
   }
