@@ -1,5 +1,13 @@
 import Tournament from '../../models/tournament';
 import {createError} from '../../libs/common';
+import isPast from 'date-fns/is_past';
+import isFuture from 'date-fns/is_future';
+
+const STATUS = {
+  PREPARING: 'Preparing',
+  STARTED: 'Started',
+  FINISHED: 'Finished'
+};
 
 export default class TournamentService {
   constructor(solutionService) {
@@ -25,6 +33,13 @@ export default class TournamentService {
     };
   }
 
+  getStatus(tournament) {
+    if (isPast(new Date(tournament.endDate))) return STATUS.FINISHED;
+    if (isFuture(new Date(tournament.startDate))) return STATUS.PREPARING;
+
+    return tournament.status;
+  }
+
   async getTournamets(userId) {
     const response = await Tournament.findAndCount();
 
@@ -39,6 +54,7 @@ export default class TournamentService {
       const tasksResult = this.getTournamentStatistic(tournament, solutions);
       return {
         ...tournament,
+        status: this.getStatus(tournament),
         ...tasksResult
       };
     });
