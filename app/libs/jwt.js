@@ -1,6 +1,5 @@
 import config from '../configuration';
-
-const jwt = {};
+import jwt from 'jsonwebtoken';
 
 export const setToken = (res, token) => {
     res.setHeader('x-access-token', token);
@@ -12,11 +11,15 @@ export const getToken = (req) => {
 };
 
 export const signToken = (data) => {
-    return jwt.sign(
-        data,
-        config.get('key'),
-        {expiresIn: config.get('expirationPeriod')}
-    );
+    try {
+        return jwt.sign(
+            data,
+            config.get('key'),
+            {expiresIn: config.get('expirationPeriod')}
+        );
+    } catch (error) {
+        throw error;
+    }
 };
 
 export const verifyToken = (token) => {

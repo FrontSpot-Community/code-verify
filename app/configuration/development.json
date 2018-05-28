@@ -2,6 +2,8 @@
   "port": 3002,
   "static": "../src",
   "index": "../src/index.html",
+  "key": "test",
+  "expirationPeriod": "30d",
   "db": {
     "connection": "mongodb://vlados:vlados@ds015690.mlab.com:15690/inbriefdb",
     "name": "inbrief",
