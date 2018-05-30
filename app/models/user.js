@@ -3,7 +3,8 @@ import {createModel} from '../libs/mongoose';
 import {stringAndTrimType} from '../libs/mongoosePropertyTypes';
 import {
     findAndCount,
-    findOneOrCreate
+    findOneOrCreate,
+    findAndIncrementField
 } from '../libs/mongooseExtensionMethods';
 
 const Schema = mongoose.Schema;
@@ -21,14 +22,19 @@ const userSchema = new Schema({
     phoneNumber: stringAndTrimType,
     country: stringAndTrimType,
     upsa: stringAndTrimType,
-    epamEmployee: Boolean
+    epamEmployee: Boolean,
+    score: {
+        type: Number,
+        default: 0
+    }
 });
 
 const userModel = createModel(
     'User',
     userSchema,
     findAndCount,
-    findOneOrCreate
+    findOneOrCreate,
+    findAndIncrementField
 );
 
 export default userModel;

@@ -36,6 +36,15 @@ export async function findOneOrCreate(criteria, document) {
     }
 }
 
+export function findAndIncrementField(criteria, field, inc = 1) {
+    return this.findOneAndUpdate(
+            criteria,
+            {$inc: {[field]: inc}},
+            {new: true}
+        )
+        .catch(Promise.reject);
+}
+
 export function githubModelToUserModel(githubUser) {
     return {
         githubId: githubUser.id,
