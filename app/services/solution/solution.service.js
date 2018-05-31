@@ -1,5 +1,6 @@
 import Solution from '../../models/solution';
 import Task from '../../models/task';
+import User from '../../models/user';
 import {createError} from '../../libs/common';
 import pick from '../../libs/pick';
 
@@ -36,7 +37,11 @@ export default class SolutionService {
       status
     } = result;
 
-    const completed = this.isTaskFinished(task, statistics);
+    const condition = {userId, taskId};
+    const solutionInDB = await Solution.findOne(condition);
+    const completed = this.isTaskFinished(task, statistics, solutionInDB);
+    completed && (!solutionInDB || !solutionInDB.completed) &&
+      await User.findAndIncrementField({_id: userId}, 'score');
 
     const data = {
       userId,
@@ -51,7 +56,6 @@ export default class SolutionService {
       jsonResult: JSON.stringify(json)
     };
 
-    const condition = {userId, taskId};
     const options = {new: true, upsert: true};
     const updatedData = await Solution
       .findOneAndUpdate(condition, data, options);
@@ -59,11 +63,11 @@ export default class SolutionService {
     return this.cleanResponce(updatedData);
   }
 
-  isTaskFinished(task, statistics) {
+  isTaskFinished(task, statistics, solutionInDB) {
     const {numberOfTests} = task || {};
     const {passed} = statistics || {};
 
-    return numberOfTests && passed
+    return (solutionInDB && solutionInDB.completed) || numberOfTests && passed
       && numberOfTests > 0 && numberOfTests <= passed;
   }
 

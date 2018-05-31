@@ -1,7 +1,12 @@
 import User from '../models/user';
 import * as commonCrudOperations from '../libs/commonCrudOperations';
 
-export const getAll = commonCrudOperations.getAll(User);
+export const getAll = commonCrudOperations.getAll(
+  User,
+  {},
+  null,
+  {score: -1}
+);
 
 export const getById = commonCrudOperations.getById(User);
 

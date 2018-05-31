@@ -1,9 +1,14 @@
 import pick from '../libs/pick';
 
-export const getAll = (Model) => {
+export const getAll = (
+  Model,
+  filter = {},
+  skipLimit = null,
+  sortSettings = null
+) => {
   return (req, res, next) => {
     return Model
-    .findAndCount()
+    .findAndCount(filter, skipLimit, sortSettings)
     .then((data) => res.json(data))
     .catch(next);
   };
