@@ -27,7 +27,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors(config.get('corsOptions')));
 app.use(passport.initialize());
-app.use(passport.session());
 passportInitializer(passport, gitHubStrategyFactory());
 app.use('/', checkAuthenticationMiddleware, routers);
 app.use('/docs', express.static('docs'));

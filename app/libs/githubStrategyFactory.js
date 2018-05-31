@@ -7,7 +7,7 @@ const createInstanceGitHubStrategy = ()=> {
     const callback = (accessToken, refreshToken, profile, cb) => {
         return UserModel
             .findOneOrCreate({githubId: profile.id}, profile)
-            .then((data) => cb(null, data))
+            .then((data) => cb(null, data._doc))
             .catch((err) => cb(err) );
     };
     return new GitHubStrategy(options, callback);

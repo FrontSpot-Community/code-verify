@@ -1,23 +1,18 @@
 import express from 'express';
-import passport from 'passport';
 import config from '../configuration';
-
+import {successAuthenticateGithub} from '../handlers/auth.handler';
+import {passportAuthMiddlware} from '../middlewares/passport.middleware';
 /**
  * @module Routes/Auth route
  */
-
-
 const router = express.Router();
 
-const successRedirect = config.get('github:login:success_redirect');
 const failureRedirect = config.get('github:login:failure_redirect');
 
-router.get('/auth/github', passport.authenticate('github'));
+router.get('/auth/github', passportAuthMiddlware());
 router.get('/auth/github/callback',
-    passport.authenticate('github', {failureRedirect}),
-    (req, res) => {
-      return res.redirect(successRedirect);
-    }
+  passportAuthMiddlware({failureRedirect}),
+  successAuthenticateGithub
 );
 
 
