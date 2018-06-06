@@ -26,6 +26,10 @@ const userSchema = new Schema({
     score: {
         type: Number,
         default: 0
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
 
