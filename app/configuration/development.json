@@ -24,7 +24,7 @@
     }
   },
   "codeRunner": {
-      "baseUrl": "http://battle.frontspot.co/runner-api",
+      "baseUrl": "https://battle.frontspot.co/runner-api",
       "endpoints": {
         "run": "runner"
       }
