@@ -40,6 +40,19 @@ export const getById = (Model, findBy) => {
   };
 };
 
+export const removeById = (Model, findBy) => {
+  return (req, res, next) => {
+    const select = findBy
+      ? {[findBy]: req.params.id || req.user._id}
+      : {_id: req.params.id || req.user._id};
+
+    return Model
+          .findOneAndRemove(select)
+          .then((data) => res.json(data))
+          .catch(next);
+  };
+};
+
 export const add = (Model) => {
   return (req, res, next) => {
     const objectToInsert = pick(req.body, Object.keys(req.body));
