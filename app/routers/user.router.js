@@ -1,6 +1,10 @@
 import express from 'express';
 import {
-    getAll, getById, getUser, removeUser, editUser
+    getAll,
+    getById,
+    getUser,
+    removeUser,
+    editUser
 } from '../handlers/user.handler';
 
 /**

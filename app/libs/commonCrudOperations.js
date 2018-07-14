@@ -1,4 +1,5 @@
 import pick from '../libs/pick';
+import { useId } from '../libs/useId';
 
 export const getAll = (
   Model,
@@ -8,48 +9,42 @@ export const getAll = (
 ) => {
   return (req, res, next) => {
     return Model
-    .findAndCount(filter, skipLimit, sortSettings)
-    .then((data) => res.json(data))
-    .catch(next);
+      .findAndCount(filter, skipLimit, sortSettings)
+      .then((data) => res.json(data))
+      .catch(next);
   };
 };
 
 export const getById = (Model, findBy) => {
   return (req, res, next) => {
-    const select = findBy
-      ? {[findBy]: req.params.id || req.user._id}
-      : {_id: req.params.id || req.user._id};
-
+    const select = useId(req, findBy);
     const findSuccess = (data) => {
       return data
-          ? res.json(data)
-          : Promise.reject({status: 404, message: 'Not Found'});
+        ? res.json(data)
+        : Promise.reject({status: 404, message: 'Not Found'});
     };
 
     return req.query.populateField
-        ? Model
-          .findOne(select)
-          .populate(req.query.populateField)
-          .exec()
-          .then(findSuccess)
-          .catch(next)
-        : Model
-          .findOne(select)
-          .then(findSuccess)
-          .catch(next);
+      ? Model
+        .findOne(select)
+        .populate(req.query.populateField)
+        .exec()
+        .then(findSuccess)
+        .catch(next)
+      : Model
+        .findOne(select)
+        .then(findSuccess)
+        .catch(next);
   };
 };
 
 export const removeById = (Model, findBy) => {
   return (req, res, next) => {
-    const select = findBy
-      ? {[findBy]: req.params.id || req.user._id}
-      : {_id: req.params.id || req.user._id};
-
+    const select = useId(req, findBy);
     return Model
-          .findOneAndRemove(select)
-          .then((data) => res.json(data))
-          .catch(next);
+      .findOneAndRemove(select)
+      .then((data) => res.json(data))
+      .catch(next);
   };
 };
 
