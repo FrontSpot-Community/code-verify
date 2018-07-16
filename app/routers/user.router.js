@@ -15,7 +15,7 @@ const router = express.Router();
 router.get('/me', getUser);
 router.get('/user', getAll);
 router.get('/user/:id', getById);
-router.post('/user/:id', removeUser);
+router.delete('/user/:id', removeUser);
 router.put('/user/:id', editUser);
 
 

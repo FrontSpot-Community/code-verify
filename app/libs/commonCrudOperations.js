@@ -1,5 +1,4 @@
 import pick from '../libs/pick';
-import { useId } from '../libs/useId';
 
 export const getAll = (
   Model,
@@ -17,7 +16,7 @@ export const getAll = (
 
 export const getById = (Model, findBy) => {
   return (req, res, next) => {
-    const select = useId(req, findBy);
+    const selector = getSelector(req, findBy);
     const findSuccess = (data) => {
       return data
         ? res.json(data)
@@ -26,13 +25,13 @@ export const getById = (Model, findBy) => {
 
     return req.query.populateField
       ? Model
-        .findOne(select)
+        .findOne(selector)
         .populate(req.query.populateField)
         .exec()
         .then(findSuccess)
         .catch(next)
       : Model
-        .findOne(select)
+        .findOne(selector)
         .then(findSuccess)
         .catch(next);
   };
@@ -40,9 +39,9 @@ export const getById = (Model, findBy) => {
 
 export const removeById = (Model, findBy) => {
   return (req, res, next) => {
-    const select = useId(req, findBy);
+    const selector = getSelector(req, findBy);
     return Model
-      .findOneAndRemove(select)
+      .findOneAndRemove(selector)
       .then((data) => res.json(data))
       .catch(next);
   };
@@ -69,4 +68,10 @@ export const update = (Model) => {
       .then((data) => res.json(data))
       .catch(next);
   };
+};
+
+const getSelector = (req, param) => {
+  return param
+  ? {[param]: req.params.id || req.user._id}
+  : {_id: req.params.id || req.user._id};
 };
