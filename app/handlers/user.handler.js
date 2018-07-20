@@ -12,6 +12,6 @@ export const getById = commonCrudOperations.getById(User);
 
 export const getUser = commonCrudOperations.getById(User);
 
-export const removeUser = commonCrudOperations.removeById(User);
+export const removeUser = commonCrudOperations.removeById(User, 'id');
 
 export const editUser = commonCrudOperations.update(User);
