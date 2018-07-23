@@ -7,7 +7,7 @@ mongoose.connect(config.get('db:connection'));
 mongoose.Promise = Promise;
 
 mongoose.connection.once('open', function() {
-  solution.find({}).then((solutions) => {
+  solution.find({}).then(async (solutions) => {
     const usersScores = {};
     solutions.forEach((data) => {
       if (data.completed) {
@@ -19,12 +19,15 @@ mongoose.connection.once('open', function() {
       }
     });
 
-    Object.entries(usersScores).forEach(async ([_id, score]) => {
+    const entries = Object.entries(usersScores);
+    for (let [_id, score] of entries) {
       await user.findOneAndUpdate(
         {_id},
         {score},
         {new: true}
       );
-    });
+    }
+    await mongoose.connection.close();
+    process.exit();
   });
 });

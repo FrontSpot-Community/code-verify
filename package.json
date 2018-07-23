@@ -17,7 +17,7 @@
     "build-server": "babel -d ./build ./app --copy-files",
     "build": "npm run clean-build && npm run build-server",
     "run-build": "npm run build && cross-env NODE_ENV=production node ./build",
-    "count-rank": "cross-env NODE_ENV=development babel-node ./tools/countUserSolutions.js"
+    "count-rank": "cross-env NODE_ENV=production babel-node ./tools/countUserSolutions.js"
   },
   "pre-commit": [
     "lint",
