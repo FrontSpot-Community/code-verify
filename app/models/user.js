@@ -9,6 +9,31 @@ import {
 
 const Schema = mongoose.Schema;
 
+const taskScore = new Schema({
+    name: stringAndTrimType,
+    language: stringAndTrimType,
+    status: stringAndTrimType,
+    complexity: stringAndTrimType,
+    contentmentQuantity: {type: Number, default: 0},
+    resolvedQuantity: {type: Number, default: 0},
+    taskStatus: stringAndTrimType
+});
+
+const scoreSchema = new Schema({
+    tournaments: {
+        participated: {type: Number, default: 0},
+        finished: {type: Number, default: 0},
+        wins: {type: Number, default: 0}
+    },
+    tasks: [taskScore],
+    total: {
+        solved: {type: Number, default: 0},
+        trained: {type: Number, default: 0},
+        attempts: {type: Number, default: 0}
+    },
+    totalScore: {type: Number, default: 0}
+});
+
 const userSchema = new Schema({
     githubLogin: stringAndTrimType,
     githubUsername: stringAndTrimType,
@@ -23,10 +48,8 @@ const userSchema = new Schema({
     country: stringAndTrimType,
     upsa: stringAndTrimType,
     epamEmployee: Boolean,
-    score: {
-        type: Number,
-        default: 0
-    }
+    score: {type: Number, default: 0}, // deprecated field
+    totalScore: scoreSchema
 });
 
 const userModel = createModel(
