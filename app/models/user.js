@@ -30,6 +30,10 @@ const userSchema = new Schema({
             attempts: {type: Number, default: 0} // done
         },
         totalScore: {type: Number, default: 0}
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 });
 

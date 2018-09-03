@@ -22,4 +22,6 @@ export const getById = function(req, res, next) {
 
 export const add = commonCrudOperations.add(Tournament);
 
+export const remove = commonCrudOperations.removeById(Tournament, 'id');
+
 export const update = commonCrudOperations.update(Tournament);
