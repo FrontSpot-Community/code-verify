@@ -23,7 +23,8 @@ const taskSchema = new Schema({
   resolvedSuccessfully: {type: Number},
   resolvedQuantity: {type: Number},
   authorName: stringAndTrimType,
-  taskStatus: stringAndTrimType
+  taskStatus: stringAndTrimType,
+  score: {type: Number, default: 1}
 });
 
 taskSchema.pre('save', function(next) {

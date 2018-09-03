@@ -40,8 +40,9 @@ export default class SolutionService {
     const condition = {userId, taskId};
     const solutionInDB = await Solution.findOne(condition);
     const completed = this.isTaskFinished(task, statistics, solutionInDB);
-    completed && (!solutionInDB || !solutionInDB.completed) &&
-      await User.findAndIncrementField({_id: userId}, 'score');
+    const currentUser = await User.findById(userId);
+
+    await this.changeStatistics(completed, solutionInDB, task, currentUser);
 
     const data = {
       userId,
@@ -115,5 +116,37 @@ export default class SolutionService {
       return data.map((item) => this.cleanResponce(item));
     }
     return this.cleanResponce(data);
+  }
+
+  countScore(solved, solutionInDB, task, user) {
+    if (solved) {
+      return !solutionInDB
+        ? task.score * 2
+        : task.score;
+    } else {
+      return user.statistics.totalScore;
+    }
+  }
+
+  async changeStatistics(completed, solutionInDB, task, user) {
+    const solved = completed && (!solutionInDB || !solutionInDB.completed);
+    const data = {
+      statistics: {
+        ...user.statistics,
+        tasks: {
+          solved: solved
+            ? user.statistics.tasks.solved + 1
+            : user.statistics.tasks.solved,
+          trained: !solutionInDB
+            ? user.statistics.tasks.trained + 1
+            : user.statistics.tasks.trained,
+          attempts: solutionInDB && solutionInDB.completed
+            ? user.statistics.tasks.attempts
+            : user.statistics.tasks.attempts + 1
+        },
+        totalScore: this.countScore(solved, solutionInDB, task, user)
+      }
+    };
+    await User.findByIdAndUpdate(user._id, data);
   }
 }

@@ -8,7 +8,6 @@ import {
 } from '../libs/mongooseExtensionMethods';
 
 const Schema = mongoose.Schema;
-
 const userSchema = new Schema({
     githubLogin: stringAndTrimType,
     githubUsername: stringAndTrimType,
@@ -23,9 +22,14 @@ const userSchema = new Schema({
     country: stringAndTrimType,
     upsa: stringAndTrimType,
     epamEmployee: Boolean,
-    score: {
-        type: Number,
-        default: 0
+    score: {type: Number, default: 0}, // deprecated field
+    statistics: {
+        tasks: {
+            solved: {type: Number, default: 0}, // done
+            trained: {type: Number, default: 0},
+            attempts: {type: Number, default: 0} // done
+        },
+        totalScore: {type: Number, default: 0}
     },
     isAdmin: {
         type: Boolean,
