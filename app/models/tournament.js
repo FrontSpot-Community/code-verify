@@ -41,10 +41,10 @@ tournamentSchema.pre('save', function(next) {
     next();
   });
 
-const taskModel = createModel(
+const tournamentModel = createModel(
     'Tournament',
     tournamentSchema,
     findAndCount
 );
 
-export default taskModel;
+export default tournamentModel;

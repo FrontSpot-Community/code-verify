@@ -40,10 +40,10 @@ const SolutionSchema = new Schema({
     executionError: stringAndTrimType
 });
 
-const taskModel = createModel(
+const solutionModel = createModel(
     'Solution',
     SolutionSchema,
     findAndCount
 );
 
-export default taskModel;
+export default solutionModel;
