@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 import {createModel} from '../libs/mongoose';
-import {stringAndTrimType} from '../libs/mongoosePropertyTypes';
+import {
+    stringAndTrimType,
+    numberAndDefaultType
+} from '../libs/mongoosePropertyTypes';
 import {
     findAndCount,
     findOneOrCreate,
@@ -22,14 +25,28 @@ const userSchema = new Schema({
     country: stringAndTrimType,
     upsa: stringAndTrimType,
     epamEmployee: Boolean,
-    score: {type: Number, default: 0}, // deprecated field
+    score: numberAndDefaultType, // deprecated field
     statistics: {
         tasks: {
-            solved: {type: Number, default: 0}, // done
-            trained: {type: Number, default: 0},
-            attempts: {type: Number, default: 0} // done
+            solved: numberAndDefaultType,
+            trained: numberAndDefaultType,
+            attempts: numberAndDefaultType
         },
-        totalScore: {type: Number, default: 0}
+        tournaments: {
+            solved: numberAndDefaultType,
+            trained: numberAndDefaultType,
+            attempts: numberAndDefaultType
+        },
+        solvedTasks: {
+            year: numberAndDefaultType,
+            history: {
+                mortal: [numberAndDefaultType],
+                champion: [numberAndDefaultType],
+                berserk: [numberAndDefaultType],
+                fighter: [numberAndDefaultType]
+            }
+        },
+        totalScore: numberAndDefaultType
     },
     isAdmin: {
         type: Boolean,
