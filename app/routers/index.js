@@ -10,6 +10,7 @@ import taskRouter from './task.router';
 import userRouter from './user.router';
 import solutionRouter from './solution';
 import runRouter from './run.router';
+import secRouter from './sec.router';
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.use(taskRouter);
 router.use(userRouter);
 router.use(solutionRouter);
 router.use(runRouter);
+router.use(secRouter);
 
 export default router;
 
