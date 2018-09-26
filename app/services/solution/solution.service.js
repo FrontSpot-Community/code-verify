@@ -119,13 +119,10 @@ export default class SolutionService {
   }
 
   countScore(solved, solutionInDB, task, user) {
-    if (solved) {
-      return !solutionInDB
-        ? task.score * 2
-        : task.score;
-    } else {
-      return user.statistics.totalScore;
-    }
+    const increment = solved
+      ? !solutionInDB ? task.score * 2 : task.score
+      : 0;
+    return user.statistics.totalScore + increment;
   }
 
   async changeStatistics(completed, solutionInDB, task, user) {
