@@ -3,18 +3,19 @@ import pick from '../libs/pick';
 export const getAll = (
   Model,
   filter = {},
+  projection = null,
   skipLimit = null,
   sortSettings = null
 ) => {
   return (req, res, next) => {
     return Model
-      .findAndCount(filter, skipLimit, sortSettings)
+      .findAndCount(filter, projection, skipLimit, sortSettings)
       .then((data) => res.json(data))
       .catch(next);
   };
 };
 
-export const getById = (Model, findBy) => {
+export const getById = (Model, findBy, projection = null) => {
   return (req, res, next) => {
     const selector = getSelector(req, findBy);
     const findSuccess = (data) => {
@@ -25,13 +26,13 @@ export const getById = (Model, findBy) => {
 
     return req.query.populateField
       ? Model
-        .findOne(selector)
+        .findOne(selector, projection)
         .populate(req.query.populateField)
         .exec()
         .then(findSuccess)
         .catch(next)
       : Model
-        .findOne(selector)
+        .findOne(selector, projection)
         .then(findSuccess)
         .catch(next);
   };

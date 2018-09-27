@@ -72,7 +72,7 @@ export default class TournamentService {
 
     const tournament = await Tournament
       .findOne(query)
-      .populate('taskIds')
+      .populate({path: 'taskIds', select: '-test'})
       .lean()
       .exec();
 

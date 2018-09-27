@@ -1,12 +1,13 @@
 export async function findAndCount(
     filter = {},
+    projection = null,
     skipLimit = null,
     sort = null
 ) {
     try {
         const [count, data] = await Promise.all([
             this.count(filter).lean(),
-            this.find(filter, null, skipLimit).sort(sort).lean()
+            this.find(filter, projection, skipLimit).sort(sort).lean()
         ]);
         return {
             count,
