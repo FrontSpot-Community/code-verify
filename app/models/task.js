@@ -13,6 +13,7 @@ const taskSchema = new Schema({
   numberOfTests: Number,
   sample: stringAndTrimType,
   test: stringAndTrimType,
+  testSample: stringAndTrimType,
   stars: {type: Number},
   satisfaction: stringAndTrimType,
   solvedBy: stringAndTrimType,

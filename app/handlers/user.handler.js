@@ -5,6 +5,7 @@ export const getAll = commonCrudOperations.getAll(
   User,
   {},
   null,
+  null,
   {'statistics.totalScore': -1}
 );
 
