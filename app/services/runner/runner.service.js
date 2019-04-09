@@ -26,7 +26,8 @@ class Runner {
             language,
             code,
             fixture: tests,
-            testFramework: testFrameworks[language]
+            testFramework: testFrameworks[language],
+            ...(language === 'javascript' ? {languageVersion: '8.x/babel'} : {})
         };
 
         try {
